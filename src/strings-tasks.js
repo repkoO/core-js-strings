@@ -447,8 +447,8 @@ function getStringFromTemplate(firstName, lastName) {
  *   extractNameFromTemplate('Hello, John Doe!') => 'John Doe'
  *   extractNameFromTemplate('Hello, Chuck Norris!') => 'Chuck Norris'
  */
-function extractNameFromTemplate(/* value */) {
-  throw new Error('Not implemented');
+function extractNameFromTemplate(value) {
+  return value.slice(7, -1);
 }
 
 /**
@@ -502,8 +502,25 @@ function extractEmails(str) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+  const alphabetToUpperCase = alphabet.toUpperCase();
+
+  return str
+    .split('')
+    .map((stringSymbol) => {
+      if (alphabet.includes(stringSymbol)) {
+        return alphabet.at(alphabet.indexOf(stringSymbol) - 13);
+      }
+      if (alphabetToUpperCase.includes(stringSymbol)) {
+        return alphabetToUpperCase.at(
+          alphabetToUpperCase.indexOf(stringSymbol) - 13
+        );
+      }
+
+      return stringSymbol;
+    })
+    .join('');
 }
 
 /**
